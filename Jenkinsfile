@@ -15,9 +15,9 @@ pipeline {
 
         stage('Build') {
             steps {
-                    dir('student-management') {
-                    sh 'mvn clean package'
-                }
+		dir('student-management') {
+			sh 'mvn clean package'
+		}
             }
         }
 
