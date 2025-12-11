@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: spring-app
-          image: chaibimarwa/student-management:latest
+          image: hbouthayna/student-management:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
