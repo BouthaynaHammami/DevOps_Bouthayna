@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: spring-config
+  namespace: devops
 data:
   SPRING_DATASOURCE_URL: jdbc:mysql://mysql-service:3306/springdb
   SPRING_JPA_HIBERNATE_DDL_AUTO: update
@@ -10,6 +11,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: spring-secret
+  namespace: devops
 type: Opaque
 data:
   SPRING_DATASOURCE_USERNAME: cm9vdA==
@@ -19,6 +21,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-app
+  namespace: devops
 spec:
   replicas: 2
   selector:
@@ -44,6 +47,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: spring-service
+  namespace: devops
 spec:
   selector:
     app: spring-app
