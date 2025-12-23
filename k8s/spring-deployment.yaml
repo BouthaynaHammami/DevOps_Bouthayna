@@ -4,8 +4,12 @@ metadata:
   name: spring-config
   namespace: devops
 data:
-  SPRING_DATASOURCE_URL: jdbc:mysql://mysql-service:3306/springdb
+  SPRING_DATASOURCE_URL: jdbc:mysql://mysql-service:3306/springdb?createDatabaseIfNotExist=true
   SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+  MANAGEMENT_ENDPOINTS_WEB_BASE_PATH: /actuator
+  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: prometheus,health,info
+
 ---
 apiVersion: v1
 kind: Secret
@@ -15,7 +19,8 @@ metadata:
 type: Opaque
 data:
   SPRING_DATASOURCE_USERNAME: cm9vdA==
-  SPRING_DATASOURCE_PASSWORD: cm9vdDEyMw==
+  SPRING_DATASOURCE_PASSWORD: QmFzZV9TZWN1cmlzZV8xMjM=
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -42,6 +47,7 @@ spec:
                 name: spring-config
             - secretRef:
                 name: spring-secret
+
 ---
 apiVersion: v1
 kind: Service
@@ -54,5 +60,4 @@ spec:
   ports:
     - port: 8089
       targetPort: 8089
-      nodePort: 30081
-  type: NodePort
+  type: ClusterIP
