@@ -9,20 +9,24 @@ data:
       scrape_interval: 15s
 
     scrape_configs:
+      # Prometheus lui-même
       - job_name: "prometheus"
         static_configs:
           - targets: ["localhost:9090"]
 
+      # Spring Boot (avec context-path /student)
       - job_name: "spring-app"
-        metrics_path: /actuator/prometheus
+        metrics_path: /student/actuator/prometheus
         static_configs:
           - targets: ["spring-service.devops:8089"]
 
+      # Jenkins (accessible depuis Kubernetes via IP machine)
       - job_name: "jenkins"
         metrics_path: /prometheus
         static_configs:
-          - targets: ["host.docker.internal:8080"]
+          - targets: ["172.21.29.107:8080"]
 
+      # Node Exporter
       - job_name: "node"
         static_configs:
           - targets: ["node-exporter.monitoring:9100"]
