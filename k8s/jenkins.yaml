@@ -25,12 +25,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: jenkins
-  namespace: monitoring
+  name: spring-service
+  namespace: devops
 spec:
   selector:
-    app: jenkins
+    app: spring-app
   ports:
     - port: 8080
-      targetPort: 8080
-  type: ClusterIP
+      targetPort: 8089
+  type: NodePort
