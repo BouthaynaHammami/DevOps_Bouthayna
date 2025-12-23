@@ -16,7 +16,7 @@ data:
       - job_name: "spring-app"
         metrics_path: /actuator/prometheus
         static_configs:
-          - targets: ["spring-service.devops:8080"]
+          - targets: ["spring-service.devops:8089"]
 
       - job_name: "jenkins"
         metrics_path: /prometheus
