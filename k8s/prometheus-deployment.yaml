@@ -21,11 +21,11 @@ data:
       - job_name: "jenkins"
         metrics_path: /prometheus
         static_configs:
-          - targets: ["172.21.29.107:8080"]
+          - targets: ["host.docker.internal:8080"]
 
       - job_name: "node"
         static_configs:
-          - targets: ["node-exporter:9100"]
+          - targets: ["node-exporter.monitoring:9100"]
 
 ---
 apiVersion: apps/v1
